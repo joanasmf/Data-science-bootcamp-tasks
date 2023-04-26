@@ -1,0 +1,48 @@
+#This program allows the user to choose two different financial calculators:
+#An investment calculator and a home loan repayment (bond) calculator.
+
+import math
+
+print("investment - to calculate the amount of interest you'll earn on your investment \nbond - to calculate the amount you'll have to pay on a home loan")
+user_input = input("\nEnter either 'investment' or 'bond' from the menu above to proceed:")
+
+
+user_input = user_input.lower()
+
+#The user inputs their investment informaton and the program outputs the total amount they'll receive back,
+#given the period, and specified interest rate, and whether they chose simple or compound interest. 
+
+if user_input == "investment":
+    deposit_money = int(input("\nWhat's the amount of money that you would like to deposit?"))
+    interest_invest = int(input("What's your interest rate? (Only the number should be entered please)"))
+    invest_years = int(input("How many years you plan to invest?"))
+    interest = input("Would you like simple or compound interest?")
+
+    interest = interest.lower()
+
+    if interest == "simple":
+        total_amount = deposit_money * (1+(interest_invest / 100)*invest_years)
+        print(f"\nYour total amount with simple interest is £{total_amount}.")
+
+    elif interest == "compound":
+        total_amount = deposit_money * math.pow((1+(interest_invest / 100)),invest_years)
+        print(f"\nYour total amount with compound interest is £{total_amount}.")
+
+    else:
+        print("\nUps, there was a problem. Please make sure you entered 'simple' or 'compound' interest.")
+
+#The program will calculate how much are the monthly repayments of their home loan repayment
+#and will out put the repayment amount per month.
+
+elif user_input == "bond":
+    home_value = int(input("\nWhat is the value of your home?"))
+    interest_rate = int(input("What is your annual interest rate? (Only the number should be entered please)"))
+    interest_rate /= 100
+    repay_months = int(input("In how many months you plan to repay your bond?"))
+
+    repayment = ((interest_rate / 12) * home_value)/(1 - (1 + ((interest_rate / 12)))**(-repay_months))
+    print(f"\nYou'll repay £{repayment} per month.")
+
+
+else:
+    print("\nUps... Make sure you entered either 'investment' or 'bond'.")
